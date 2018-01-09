@@ -74,7 +74,7 @@ namespace FoodNutrients
                 foods = await GetMatchingFoods(searchEntry.Text);
                 if (foods.Count == 0)
                 {
-                    infoLabel.Text = "Din sökning gav ingaträffar";
+                    infoLabel.Text = "Din sökning gav inga träffar";
                     layout.Children.Add(infoLabel);
                 }
                 foodCollection = FoodSearch.Result(foods);
@@ -134,13 +134,13 @@ namespace FoodNutrients
                 }
                 catch (Exception)
                 {
-
+                    client.CancelPendingRequests();
                     await DisplayAlert("Error", "Det gick inte att nå API:et för tillfället.", "Stäng");
-                    return null;
+                    return foods;
                 }
                 
             }
-            return null;   
+            return foods;   
             //using (HttpResponseMessage response = await client.GetAsync(uri))
             //{
             //    if (response.IsSuccessStatusCode)
