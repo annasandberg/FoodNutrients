@@ -16,14 +16,13 @@ namespace FoodNutrients
         List<Food> foods;
         ObservableCollection<FoodSearch> foodCollection;
         Label infoLabel = new Label();
-        //ListView list;
-       // OnPropertyChanged onchange = new OnPropertyChanged(foods);
 
         public MainPage()
 		{
 			InitializeComponent();
             foods = new List<Food>();
             foodCollection = new ObservableCollection<FoodSearch>();
+            infoLabel.Margin = new Thickness(10, 50, 0, 0);
 
             var layout = new StackLayout
             {
@@ -70,10 +69,11 @@ namespace FoodNutrients
                 layout.Children.Remove(table);
                 layout.Children.Remove(infoLabel);
                 list.ItemsSource = null;
-                //infoLabel.Text = "";
+
                 foods = await GetMatchingFoods(searchEntry.Text);
                 if (foods.Count == 0)
                 {
+                    layout.Children.Remove(list);
                     infoLabel.Text = "Din sökning gav inga träffar";
                     layout.Children.Add(infoLabel);
                 }
@@ -88,8 +88,6 @@ namespace FoodNutrients
             infoLabel.FontAttributes = FontAttributes.Bold;
             infoLabel.TextColor = Color.OrangeRed;
 
-            
-            //om klickar på item ilistan, visa näringsinnehåll
             list.ItemSelected += async (s, e) =>
             {
                 list.ItemsSource = null;
@@ -141,23 +139,7 @@ namespace FoodNutrients
                 
             }
             return foods;   
-            //using (HttpResponseMessage response = await client.GetAsync(uri))
-            //{
-            //    if (response.IsSuccessStatusCode)
-            //    {
-            //        var content = response.Content;
-            //        var result = await content.ReadAsStringAsync();
-            //        foods = JsonConvert.DeserializeObject<List<Food>>(result);
-            //        foods = foods.Where(x => x.Name.ToLower().Contains(searchString.ToLower())).ToList();
-
-            //        return foods;
-            //    }
-            //    else
-            //    {
-            //        await DisplayAlert("Error", "Det gick inte att nå API:et för tillfället.", "Stäng");
-            //        return null;
-            //    }
-            //}
+           
             
         }
 
@@ -165,16 +147,30 @@ namespace FoodNutrients
         {
             var uri = new Uri(string.Format(Uri + "/" + id, string.Empty));
             Food food = null;
-            HttpClient client = new HttpClient();
-            HttpResponseMessage response = await client.GetAsync(uri);
-            if (response.IsSuccessStatusCode)
+            using (HttpClient client = new HttpClient())
             {
-                var content = response.Content.ReadAsStringAsync().Result;
-                food = JsonConvert.DeserializeObject<Food>(content);
+                client.Timeout = TimeSpan.FromMilliseconds(1000);
+                try
+                {
+                    HttpResponseMessage response = await client.GetAsync(uri);
+                    if (response.IsSuccessStatusCode)
+                    {
+                        var content = response.Content.ReadAsStringAsync().Result;
+                        food = JsonConvert.DeserializeObject<Food>(content);
+                        return food;
+                    }
+                }
+                catch (Exception)
+                {
+                    client.CancelPendingRequests();
+                    await DisplayAlert("Error", "Det gick inte att nå API:et för tillfället.", "Stäng");
+                    return food;
+                }
             }
-            
+                
             return food;
         }
+         
     }
 
     public class FoodSearch : ObservableCollection<Food>
