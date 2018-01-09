@@ -1,0 +1,105 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:FoodNutrients"
+             x:Class="FoodNutrients.MainPage">
+
+
+        <ListView  x:Name="list">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <TextCell Text="{Binding Name}"
+                              TextColor="OrangeRed"/>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+    <TableView x:Name="table" Margin="10" >
+        <TableRoot>
+            <TableSection Title="Näringsinnehåll per 100 g">
+                <ViewCell>
+                    <StackLayout Orientation="Horizontal">
+                        <Label Text="Energi (kcal)" 
+                               HorizontalOptions="Start"/>
+                        <Label x:Name="Energy"
+                              HorizontalOptions="Center"/>
+                    </StackLayout>
+                </ViewCell>
+                <ViewCell>
+                    <StackLayout Orientation="Horizontal">
+                        <Label Text="Kolhydrater (g)" 
+                               HorizontalOptions="Start"/>
+                        <Label x:Name="Carbohydrates"
+                              HorizontalOptions="End"/>
+                    </StackLayout>
+                </ViewCell>
+                <ViewCell>
+                    <StackLayout Orientation="Horizontal">
+                        <Label Text="Fett (g)" 
+                               HorizontalOptions="Start"/>
+                        <Label x:Name="Fat"
+                              HorizontalOptions="End"/>
+                    </StackLayout>
+                </ViewCell>
+                <ViewCell>
+                    <StackLayout Orientation="Horizontal">
+                        <Label Text="Protein (g)" 
+                               HorizontalOptions="Start"/>
+                        <Label x:Name="Protein"
+                              HorizontalOptions="End"/>
+                    </StackLayout>
+                </ViewCell>
+                <ViewCell>
+                    <StackLayout Orientation="Horizontal">
+                        <Label Text="Fiber (g)" 
+                               HorizontalOptions="Start"/>
+                        <Label x:Name="Fiber"
+                              HorizontalOptions="End"/>
+                    </StackLayout>
+                </ViewCell>
+                <ViewCell>
+                    <StackLayout Orientation="Horizontal">
+                        <Label Text="Sockerarter (g)" 
+                               HorizontalOptions="Start"/>
+                        <Label x:Name="Sugars"
+                              HorizontalOptions="End"/>
+                    </StackLayout>
+                </ViewCell>
+                <ViewCell>
+                    <StackLayout Orientation="Horizontal">
+                        <Label Text="Mättat fett (g)" 
+                               HorizontalOptions="Start"/>
+                        <Label x:Name="SaturatedFat"
+                              HorizontalOptions="End"/>
+                    </StackLayout>
+                </ViewCell>
+                <ViewCell>
+                    <StackLayout Orientation="Horizontal">
+                        <Label Text="Salt (g)" 
+                               HorizontalOptions="Start"/>
+                        <Label x:Name="Salt"
+                              HorizontalOptions="End"/>
+                    </StackLayout>
+                </ViewCell>
+                <ViewCell>
+                    <StackLayout Orientation="Horizontal">
+                        <Label Text="Vitamin D (ug)" 
+                               HorizontalOptions="Start"/>
+                        <Label x:Name="VitD"
+                              HorizontalOptions="End"/>
+                    </StackLayout>
+                </ViewCell>
+                <ViewCell>
+                    <StackLayout Orientation="Horizontal">
+                        <Label Text="Järn (mg)" 
+                               HorizontalOptions="Start"/>
+                        <Label x:Name="Iron"
+                              HorizontalOptions="End"/>
+                    </StackLayout>
+                </ViewCell>
+            </TableSection>
+        </TableRoot>
+    </TableView>
+
+
+</ContentPage>
