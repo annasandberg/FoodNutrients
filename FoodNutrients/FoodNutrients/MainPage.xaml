@@ -22,7 +22,8 @@
                         <Label Text="Energi (kcal)" 
                                HorizontalOptions="Start"/>
                         <Label x:Name="Energy"
-                              HorizontalOptions="Center"/>
+                               FontAttributes="Bold"
+                              HorizontalOptions="End"/>
                     </StackLayout>
                 </ViewCell>
                 <ViewCell>
@@ -30,6 +31,7 @@
                         <Label Text="Kolhydrater (g)" 
                                HorizontalOptions="Start"/>
                         <Label x:Name="Carbohydrates"
+                               FontAttributes="Bold"
                               HorizontalOptions="End"/>
                     </StackLayout>
                 </ViewCell>
@@ -38,6 +40,7 @@
                         <Label Text="Fett (g)" 
                                HorizontalOptions="Start"/>
                         <Label x:Name="Fat"
+                               FontAttributes="Bold"
                               HorizontalOptions="End"/>
                     </StackLayout>
                 </ViewCell>
@@ -46,6 +49,7 @@
                         <Label Text="Protein (g)" 
                                HorizontalOptions="Start"/>
                         <Label x:Name="Protein"
+                               FontAttributes="Bold"
                               HorizontalOptions="End"/>
                     </StackLayout>
                 </ViewCell>
@@ -54,6 +58,7 @@
                         <Label Text="Fiber (g)" 
                                HorizontalOptions="Start"/>
                         <Label x:Name="Fiber"
+                               FontAttributes="Bold"
                               HorizontalOptions="End"/>
                     </StackLayout>
                 </ViewCell>
@@ -62,6 +67,7 @@
                         <Label Text="Sockerarter (g)" 
                                HorizontalOptions="Start"/>
                         <Label x:Name="Sugars"
+                               FontAttributes="Bold"
                               HorizontalOptions="End"/>
                     </StackLayout>
                 </ViewCell>
@@ -70,6 +76,7 @@
                         <Label Text="Mättat fett (g)" 
                                HorizontalOptions="Start"/>
                         <Label x:Name="SaturatedFat"
+                               FontAttributes="Bold"
                               HorizontalOptions="End"/>
                     </StackLayout>
                 </ViewCell>
@@ -78,6 +85,7 @@
                         <Label Text="Salt (g)" 
                                HorizontalOptions="Start"/>
                         <Label x:Name="Salt"
+                               FontAttributes="Bold"
                               HorizontalOptions="End"/>
                     </StackLayout>
                 </ViewCell>
@@ -86,6 +94,7 @@
                         <Label Text="Vitamin D (ug)" 
                                HorizontalOptions="Start"/>
                         <Label x:Name="VitD"
+                               FontAttributes="Bold"
                               HorizontalOptions="End"/>
                     </StackLayout>
                 </ViewCell>
@@ -94,6 +103,7 @@
                         <Label Text="Järn (mg)" 
                                HorizontalOptions="Start"/>
                         <Label x:Name="Iron"
+                               FontAttributes="Bold"
                               HorizontalOptions="End"/>
                     </StackLayout>
                 </ViewCell>

@@ -12,7 +12,7 @@ namespace FoodNutrients
 {
 	public partial class MainPage : ContentPage
 	{
-        private string Uri = "http://172.20.201.80:58279/api/food";
+        private string Uri = "http://172.20.201.168:58279/api/food";
         List<Food> foods;
         ObservableCollection<FoodSearch> foodCollection;
         Label infoLabel = new Label();
@@ -117,23 +117,47 @@ namespace FoodNutrients
         {
             var uri = new Uri(string.Format(Uri, string.Empty));
             using (HttpClient client = new HttpClient())
-            using (HttpResponseMessage response = await client.GetAsync(uri))
             {
-                if (response.IsSuccessStatusCode)
+                client.Timeout = TimeSpan.FromMilliseconds(1000);
+                try
                 {
-                    var content = response.Content;
-                    var result = await content.ReadAsStringAsync();
-                    foods = JsonConvert.DeserializeObject<List<Food>>(result);
-                    foods = foods.Where(x => x.Name.ToLower().Contains(searchString.ToLower())).ToList();
+                    HttpResponseMessage response = await client.GetAsync(uri);
+                    if (response.IsSuccessStatusCode)
+                    {
+                        var content = response.Content;
+                        var result = await content.ReadAsStringAsync();
+                        foods = JsonConvert.DeserializeObject<List<Food>>(result);
+                        foods = foods.Where(x => x.Name.ToLower().Contains(searchString.ToLower())).ToList();
 
-                    return foods;
+                        return foods;
+                    }
                 }
-                else
+                catch (Exception)
                 {
+
                     await DisplayAlert("Error", "Det gick inte att nå API:et för tillfället.", "Stäng");
                     return null;
                 }
+                
             }
+            return null;   
+            //using (HttpResponseMessage response = await client.GetAsync(uri))
+            //{
+            //    if (response.IsSuccessStatusCode)
+            //    {
+            //        var content = response.Content;
+            //        var result = await content.ReadAsStringAsync();
+            //        foods = JsonConvert.DeserializeObject<List<Food>>(result);
+            //        foods = foods.Where(x => x.Name.ToLower().Contains(searchString.ToLower())).ToList();
+
+            //        return foods;
+            //    }
+            //    else
+            //    {
+            //        await DisplayAlert("Error", "Det gick inte att nå API:et för tillfället.", "Stäng");
+            //        return null;
+            //    }
+            //}
             
         }
 
